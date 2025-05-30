@@ -7,6 +7,8 @@ includeReadme = true
 
 [docusaurus]
 favicon = "/icon.ico"
+url = "https://unknown91248.github.io"
+baseUrl = "/Libraries"
 
 [footer]
 style = "dark"
