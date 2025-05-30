@@ -3,7 +3,6 @@ node_modules
 roblox.toml 
 .moonwave
 aftman.toml
-sourcemap.json
 .vscode
 package-lock.json 
 package.json``
