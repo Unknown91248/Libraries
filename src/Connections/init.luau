@@ -1,5 +1,11 @@
 local Connections = {}
 local ToCleanUp = {}
+
+--[=[
+	@class Connections
+
+	This is a class that makes handling connections (RBXConnection) easier!
+]=]
 local Main = {}
 Main.__index = Main
 function Main.NewConnection(name: string, connectiontype: RBXScriptSignal, func: () -> (), AutoConnect: boolean?)
