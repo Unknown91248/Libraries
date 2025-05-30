@@ -1,0 +1,28 @@
+gitSourceBranch = "main"
+
+[home]
+enabled = true
+includeReadme = true
+
+[docusaurus]
+favicon = "/icon.ico"
+
+[footer]
+style = "dark"
+copyright = "Copyright © 2025 Unknown91248. Built with Moonwave and Docusaurus."
+
+[[classOrder]]
+section = "Connections"
+classes = ["Connections"]
+
+[[home.features]]
+title = "Frequent Updates"
+description = "These libraries are updated regularly to stay aligned with Roblox’s engine changes and ensure optimal performance."
+
+[[home.features]]
+title = "Modular Design"
+description = "Each library is designed to be modular, making it easy to integrate, swap, or remove features as needed."
+
+[[home.features]]
+title = "Optimized for Performance"
+description = "All components are built with performance in mind, minimizing overhead and keeping your game running smoothly."
