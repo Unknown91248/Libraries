@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkdocs=self.webpackChunkdocs||[]).push([[314],{1069:s=>{s.exports=JSON.parse('{"functions":[],"properties":[],"types":[],"name":"Connections","desc":"This is a class that makes handling connections (RBXConnection) easier!","source":{"line":9,"path":"src/Connections/init.luau"}}')}}]);
