@@ -7,7 +7,7 @@ includeReadme = true
 
 [docusaurus]
 favicon = "/icon.ico"
-baseUrl = "/Libraries/"
+baseUrl = "/Libraries"
 [footer]
 style = "dark"
 copyright = "Copyright © 2025 Unknown91248. Built with Moonwave and Docusaurus."
