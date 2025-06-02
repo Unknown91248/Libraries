@@ -1,5 +1,5 @@
 [package]
-name = "unknown91248/Date"
+name = "unknown91248/date"
 description = "This is a util package that helps with managing days,months and dates in general."
 authors = ["unknown91248"]
 license = "MIT"
