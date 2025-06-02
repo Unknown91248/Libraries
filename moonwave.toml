@@ -12,6 +12,9 @@ baseUrl = "/Libraries/"
 style = "dark"
 copyright = "Copyright © 2025 Unknown91248. Built with Moonwave and Docusaurus."
 
+[[classOrder]]
+classes = ["Connections"]
+
 [[home.features]]
 title = "Frequent Updates"
 description = "These libraries are updated regularly to stay aligned with Roblox’s engine changes and ensure optimal performance."
