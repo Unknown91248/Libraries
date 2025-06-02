@@ -40,7 +40,7 @@ end
 	This function allows you to format a date in any way you want by using [os.date()](https://create.roblox.com/docs/reference/engine/libraries/os#date) specifiers
 	Example:
 	```lua
-Date.GetStringDate("/","%m","%d","%y") -- Example value would be 06/12/25
+	Date.GetStringDate("/","%m","%d","%y") -- Example value would be 06/12/25
 
 	```
 	@param filler string -- This is the string that will be inbetween every specifier you put.
