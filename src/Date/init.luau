@@ -91,9 +91,9 @@ end
 	A function that returns the month after the specified month
 
 	@param month string | number -- Month name or number
-	@return (string, number) -- The next month's name and number
+	@return ({string, number}) -- The next month's name and number
 ]=]
-function Date.GetNextMonth(month: string | number): (string, number)
+function Date.GetNextMonth(month: string | number): ({string, number})
 	if typeof(month) == "string" then
 		month = Date.MonthTextToNumber(month)
 	end
@@ -109,7 +109,7 @@ end
 	@param month string | number -- Month name or number
 	@return (string, number) -- The previous month's name and number
 ]=]
-function Date.GetPrevMonth(month: string | number): (string, number)
+function Date.GetPrevMonth(month: string | number): ({string, number})
 	if typeof(month) == "string" then
 		month = Date.MonthTextToNumber(month)
 	end
