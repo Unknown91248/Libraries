@@ -12,6 +12,9 @@ local Months = {
 	[11] = "November",
 	[12] = "December",
 }
+
+local days30 = { 4, 6, 9, 11 }
+
 --[=[
 	@class Date
 
@@ -19,11 +22,11 @@ local Months = {
 ]=]
 local Date = {}
 --[=[
-	This function returns the current date in the format of mm/dd/yy
+	This function returns the current date in the format of dd/mm/yy
 
 	@return string -- Returns the formatted string
 ]=]
-function Date.GetTodayInFormat(): string
+function Date.todayInFormat(): string
 	local date = os.date("!*t")
 	local day = date["day"]
 	local month = date["month"]
@@ -34,7 +37,7 @@ function Date.GetTodayInFormat(): string
 	if month < 10 then
 		month = "0" .. month
 	end
-	return month .. "/" .. day .. "/" .. year
+	return day .. "/" .. month .. "/" .. year
 end
 --[=[
 	This function allows you to format a date in any way you want by using [os.date()](https://create.roblox.com/docs/reference/engine/libraries/os#date) specifiers
@@ -47,7 +50,7 @@ end
 	@param ... string -- The specifiers you want to add.
 	@return string -- Returns the formatted string
 ]=]
-function Date.GetStringDate(filler, ...: string): string
+function Date.stringDate(filler, ...: string): string
 	local Data = { ... }
 	local fullstring = ""
 	for i, val in Data do
@@ -57,101 +60,84 @@ function Date.GetStringDate(filler, ...: string): string
 			fullstring = fullstring .. filler .. val
 		end
 	end
-	return os.date(fullstring)
+	return tostring(os.date(fullstring))
 end
 --[=[
 	Basic function that switchs a month's name to its number
 	Example: June -> 6
 
-	@param month string -- Month that you would like to be switched to a number.
+	@param month string -- Month that you want switched to a number.
 	@return number -- The month number
 ]=]
-function Date.MonthTextToNumber(month: string): number
-	for i, Month in Months do
-		if Month:lower() == month:lower() then
-			return i
-		end
-	end
+function Date.numericalMonth(month: string): number
+	return table.find(Months, month) or 0
 end
 --[=[
 	Basic function that switchs a month's number to its name
 	Example: 12 -> December
 
-	@param month number -- Month number that you would like to be switched to a name.
-	@return string -- The month name
+	@param month number -- Month number to stringify.
+	@return string -- Month name
 ]=]
-function Date.MonthNumberToText(month: number): string
-	for i, Month in Months do
-		if i == month then
-			return Month
-		end
-	end
+function Date.stringifyMonth(month: number): string
+	return Months[month] or "Invalid Month"
 end
 --[=[
 	A function that returns the month after the specified month
 
-	@param month string | number -- Month name or number
-	@return ({string, number}) -- The next month's name and number
+	@param year number -- Year number incase it moves up a year
+	@param month number -- Month number
+	@return {["year"] : number , ["month"] : number} -- The next month's number and year incase of change.
 ]=]
-function Date.GetNextMonth(month: string | number): ({string, number})
-	if typeof(month) == "string" then
-		month = Date.MonthTextToNumber(month)
-	end
+function Date.nextMonth(year: number, month: number): { ["year"]: number, ["month"]: number }
 	local nextmonth = month + 1
 	if nextmonth >= 13 then
 		nextmonth = 1
+		year += 1
 	end
-	return { Months[nextmonth], nextmonth }
+	return { year = year, month = nextmonth }
 end
 --[=[
 	A function that returns the month before the specified month
 
-	@param month string | number -- Month name or number
-	@return (string, number) -- The previous month's name and number
+	@param year number -- Year number incase it moves down a year
+	@param month number -- Month number
+	@return {["year"] : number , ["month"] : number} -- The previous month's number and year incase of change.
 ]=]
-function Date.GetPrevMonth(month: string | number): ({string, number})
-	if typeof(month) == "string" then
-		month = Date.MonthTextToNumber(month)
-	end
+function Date.GetPrevMonth(year: number, month: number): { ["year"]: number, ["month"]: number }
 	local prevmonth = month - 1
 	if prevmonth <= 0 then
 		prevmonth = 12
+		year -= 1
 	end
-	return { Months[prevmonth], prevmonth }
+	return { year = year, month = prevmonth }
 end
 --[=[
 	A function that returns a boolean on if the specified year is a leap year
 
-	@param year number -- The year you want to check
+	@param year number -- The year to check
 	@return boolean -- The boolean on if the year is a leap year
 ]=]
-function Date.IsLeapYear(year: number): boolean
+function Date.isLeapYear(year: number): boolean
 	return year % 4 == 0 and year % 100 ~= 0
 end
 --[=[
 	A function that returns the amount of days that is in the specified month and year
 	Example: `February 2024` would return `29`
 	@param month string| number -- The month you want to get the days from
-	@param year number -- The year (to check if it is a leap year)
+	@param year number -- The year (incase of leap year)
 	@return number -- Amount of days in specified month
 ]=]
-function Date.GetDaysInMonth(month: string | number, year: number): number
+function Date.daysInMonth(month: string | number, year: number): number
 	if typeof(month) == "string" then
-		month = Date.MonthTextToNumber(month)
+		month = Date.numericalMonth(month)
 	end
-	local days = 31
 
 	if month == 2 then
-		if Date.IsLeapYear(year) then
-			days = 29
-		else
-			days = 28
-		end
-	elseif month == 4 or month == 6 or month == 9 or month == 11 then
-		days = 30
+		return Date.isLeapYear(year) and 29 or 28
 	end
 
-	return days
+	return table.find(days30, month) and 30 or 31
 end
 
 return Date
