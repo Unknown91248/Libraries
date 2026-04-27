@@ -3,7 +3,7 @@ name = "unknown91248/connections"
 description = "This is a simple package that makes handling connections easier!"
 authors = ["unknown91248"]
 license = "MIT"
-version = "0.0.2"
+version = "1.0.0"
 registry = "https://github.com/UpliftGames/wally-index"
 realm = "shared"
 

@@ -1,6 +1,13 @@
 local ConnectionsT = {}
 local ToCleanUp = {}
 
+export type connection = {
+	name: string,
+	connectiontype: RBXScriptSignal,
+	func: (...any) -> ...any,
+	AutoConnect: boolean?,
+}
+
 --[=[
 	@class Connections
 
@@ -13,14 +20,14 @@ Connections.__index = Connections
 
 	@param name string -- The name you want to assign to the connection
 	@param connectiontype RBXScriptSignal -- The type of connection you want to use
-	@param func (any) -> (any) -- The function to run when the connection is fired
+	@param func (...any) -> ...any -- The function to run when the connection is fired
 	@param AutoConnect boolean? -- If true then the connection will automatically connect to the function
-	@return table -- Returns the table so that it's functions can be called
+	@return connection -- Returns the table so that it's functions can be called
 ]=]
 function Connections.NewConnection(
 	name: string,
 	connectiontype: RBXScriptSignal,
-	func: (any) -> any,
+	func: (...any) -> ...any,
 	AutoConnect: boolean?
 )
 	assert(not ConnectionsT[name], "Name '" .. name .. "' is already in use by another function!")
@@ -65,14 +72,10 @@ end
 	This connection retrieves a connection that was previously created so it makes it possible to run the connections functions via other scripts
 
 	@param Name string -- The name of the connection you want to get
-	@return table | nil -- Returns the table so that it's functions can be called or nil, if it isn't found
+	@return table | nil -- Returns the table so that it's functions can be called or nil, if not found
 ]=]
-function Connections.GetConnection(Name)
-	if ConnectionsT[Name] then
-		return ConnectionsT[Name]
-	else
-		return nil
-	end
+function Connections.GetConnection(Name: string)
+	return ConnectionsT[Name] or nil
 end
 --[=[
 	This connection adds said connection to a "trash can" so that when the .Clean() function is ran, all the connections in the "trash can" would be destroyed
@@ -98,7 +101,7 @@ end
 
 	@param newfunc (any) -> any -- the function you want it to update to
 ]=]
-function Connections:ChangeFunction(newfunc: (any) -> any)
+function Connections:ChangeFunction(newfunc: (...any) -> ...any)
 	ConnectionsT[self.Name].Function = newfunc
 end
 --[=[
